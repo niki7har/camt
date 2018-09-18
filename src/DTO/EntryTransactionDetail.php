@@ -160,7 +160,7 @@ class EntryTransactionDetail
     public function getRemittanceInformation()
     {
         if ($this->remittanceInformation === null) {
-            throw new BadMethodCallException();
+            //throw new BadMethodCallException();
         }
         return $this->remittanceInformation;
     }
