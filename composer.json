@@ -1,5 +1,5 @@
 {
-    "name": "genkgo/camt",
+    "name": "niki7har/camt",
     "description": "Library to read CAMT files (XML containing bank statements).",
     "require": {
         "php": "^7.0",
