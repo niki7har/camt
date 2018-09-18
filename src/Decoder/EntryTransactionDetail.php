@@ -73,14 +73,16 @@ abstract class EntryTransactionDetail
         }
 
         foreach ($xmlDetail->RltdPties as $xmlRelatedParty) {
+            $xmlRelatedPartyTypeAccount = $xmlRelatedParty->CdtrAcct;
+            $xmlRelatedPartyType = new \stdClass;
+            $xmlRelatedPartyName = '';
             if (isset($xmlRelatedParty->Cdtr)) {
                 $xmlRelatedPartyType = $xmlRelatedParty->Cdtr;
-                $xmlRelatedPartyTypeAccount = $xmlRelatedParty->CdtrAcct;
                 $xmlRelatedPartyName = (isset($xmlRelatedPartyType->Nm)) ? (string) $xmlRelatedPartyType->Nm : '' ;
-                $relatedPartyType = $creditor = new DTO\Creditor($xmlRelatedPartyName);
-
-                $this->addRelatedParty($detail, $xmlRelatedPartyType, $relatedPartyType, $xmlRelatedPartyTypeAccount);
             }
+            $relatedPartyType = $creditor = new DTO\Creditor($xmlRelatedPartyName);
+
+            $this->addRelatedParty($detail, $xmlRelatedPartyType, $relatedPartyType, $xmlRelatedPartyTypeAccount);
 
             if (isset($xmlRelatedParty->UltmtCdtr)) {
                 $xmlRelatedPartyType = $xmlRelatedParty->UltmtCdtr;
@@ -90,14 +92,14 @@ abstract class EntryTransactionDetail
                 $this->addRelatedParty($detail, $xmlRelatedPartyType, $relatedPartyType);
             }
 
+            $xmlRelatedPartyTypeAccount = $xmlRelatedParty->DbtrAcct;
             if (isset($xmlRelatedParty->Dbtr)) {
                 $xmlRelatedPartyType = $xmlRelatedParty->Dbtr;
-                $xmlRelatedPartyTypeAccount = $xmlRelatedParty->DbtrAcct;
                 $xmlRelatedPartyName = (isset($xmlRelatedPartyType->Nm)) ? (string) $xmlRelatedPartyType->Nm : '' ;
-                $relatedPartyType = $debtor = new DTO\Debtor($xmlRelatedPartyName);
-
-                $this->addRelatedParty($detail, $xmlRelatedPartyType, $relatedPartyType, $xmlRelatedPartyTypeAccount);
             }
+            $relatedPartyType = $debtor = new DTO\Debtor($xmlRelatedPartyName);
+
+            $this->addRelatedParty($detail, $xmlRelatedPartyType, $relatedPartyType, $xmlRelatedPartyTypeAccount);
 
             if (isset($xmlRelatedParty->UltmtDbtr)) {
                 $xmlRelatedPartyType = $xmlRelatedParty->UltmtDbtr;
