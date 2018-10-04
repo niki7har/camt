@@ -43,7 +43,7 @@ class RelatedParty
     public function getAccount()
     {
         if ($this->account === null) {
-            throw new BadMethodCallException();
+            //throw new BadMethodCallException();
         }
         return $this->account;
     }
